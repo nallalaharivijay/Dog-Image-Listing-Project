@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .list-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .image-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .image-list li {
+            display: inline-block;
+            margin: 10px;
+        }
+        .image-list img {
+            width: 100px; /* Decreased image size */
+            height: 100px;
+            border-radius: 10px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        .actions a {
+            text-decoration: none;
+            color: #337ab7;
+        }
+        .actions a:hover {
+            color: #23527c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="list-name">{{ list_name }}</h2>
+        <ul class="image-list">
+            {% for image in images %}
+                <li><img src="{{ image }}" alt="Response Code Image"></li>
+            {% endfor %}
+        </ul>
+        <div class="actions">
+            <a href="{% url 'lists' %}">Back to Lists</a>
+        </div>
+    </div>
+</body>
+</html>

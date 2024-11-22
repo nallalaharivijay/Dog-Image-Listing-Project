@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+    <div class="container">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+    <div class="x">
+        <h1>Welcome, {{ user.username }}!</h1>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" style="margin-top:25px;width:100%;margin-left: 30px;">Logout</button>
+        </form>
+    </div>
+
+    <h2>Search for Dog Images by Response Code</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if images %}
+        <h3>Matching Dog Image(s)</h3>
+        <div>
+            {% for image in images %}
+                <img src="{{ image }}" alt="Dog Image for Response Code" width="300">
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h3>Save This Filter</h3>
+    <div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="list_name" placeholder="List Name" required>
+        <button type="submit" name="save" value="1">Save List</button>
+    </form>
+    <a href="{% url 'lists' %}">
+        <button style="
+            width: 10%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;">Go to Saved Lists</button>
+    </a>
+</body>
+</html>
